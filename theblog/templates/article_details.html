@@ -1,0 +1,139 @@
+{%extends 'base.html'%}
+{% load hitcount_tags %}
+{% load article_utils %}
+{% load static %}
+<link  rel="stylesheet" href="{% static 'css/prism.css'%}">
+
+{%block head%}
+{% if post.slug in request.path %}
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.theaibunny.com/{{Post.slug}}" >
+<meta name="title" property="og:title" content="{{post.title |safe |escape|striptags|truncatechars:100}}">
+<meta name="description" property="og:description" content="{{post.description |safe|striptags|escape|truncatechars:100}}">
+<meta name="image" property="og:image" content="https://aibunny.s3.ap-southeast-1.amazonaws.com/theaibunny.jpg">
+
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="theaibunny.com">
+<meta property="twitter:url" content="https://www.theaibunny.com/{{post.slug}}">
+<meta name="twitter:title" content=	"{{post.title |safe |escape|striptags|truncatechars:100}}">
+<meta name="twitter:description" content="{{post.description |safe|striptags|escape|truncatechars:100}}">
+<meta name="twitter:image" content="https://aibunny.s3.ap-southeast-1.amazonaws.com/theaibunny.jpg">
+
+
+<meta property="og:type" content="[website]">
+<meta property="og:url" content="https://www.theaibunny.com/{{Post.slug}}" >
+<meta property="og:title" content="{{post.title |safe |escape|striptags|truncatechars:100}}">
+<meta property="og:description" content="{{post.description |safe|striptags|escape|truncatechars:100}}">
+<meta property="og:image" content="[https://aibunny.s3.ap-southeast-1.amazonaws.com/theaibunny.jpg]">
+
+
+
+{% endif %}
+
+<meta name="twitter:creator" content="@TheAIbunny" />
+<meta name="twitter:site" content="www.theaibunny.com" />
+{%endblock%}
+
+
+<!-- Article Details -->
+
+{%block content %}
+
+<div class="blog-details justify-centre col-md-12 col-sm-12">
+  
+    <div class="det">
+        <strong>
+            {{post.tittle |safe }}
+        </strong>
+        <br />
+        
+          {{post.description|safe}}
+    <br/>
+        <small> 
+            <small> 
+                <small> 
+                    <span class="time-span"> {{post.post_date}} |  
+                        <i class="fa-sharp fa-solid fa-clock"></i>
+                        {{post.body|readtime}} | {% get_hit_count for post%}         
+                        <i class="fa-sharp fa-solid fa-eye"></i> | <i class="fa-solid fa-tag"></i>{{post.category}}</span>         
+                    
+      
+                </small>
+            </small>
+        </small>
+       
+    </div>
+    
+<hr/>
+<br/>
+    {{post.body|safe}}
+
+    <br/>
+    <div class='container' >
+        <div class="row main-row p-1" >
+        Share this article on twitter
+        <div class="btn">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        
+        </div>
+    </div>
+
+    </div>
+</div>
+
+    
+
+</div>
+
+
+<style>
+.container {
+    align:center;
+    display: flex;
+    margin:auto;
+    background-color:#f0fff0;
+    box-shadow: 0 0 10px 10px rgba(0,0,0,.05);
+    border-radius: 0.5rem;
+    width: 50%;
+    padding: 0px 30px;
+    text-align: center;
+}
+.main-row {
+    text-align: center;
+    justify-content: center;
+      
+}
+  
+.blog-details {
+    margin: 0 auto;
+    text-align: left;
+    line-height: 1.6;
+    width: 72%; /* optional: set the width of the element */
+    text-color: #111111;
+    font-family:roboto;
+  
+  }
+  @media (max-width: 767px) {
+    .blog-details {
+      width: 90%;
+    }
+  }
+.det{
+
+    text-align: center;
+}
+
+.time-span{
+    color: #5ECCA9;
+    font-size:10px;
+  }
+  
+
+
+
+</style>
+  
+{%endblock%}    
